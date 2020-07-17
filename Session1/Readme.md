@@ -16,6 +16,6 @@
 | --- | :-- | :-- | 
 | 1 | Sridevi Bonthu | srdevi.b@vishnu.edu.in |
 | 2 | Gajanana Ganjigatti | gajucg@gmail.com |
-| 3 | Anil Bhatt |  |
-| 4 | Maruthi Srinivas |  |
+| 3 | Anil Bhatt | 	anilaknb@gmail.com |
+| 4 | Maruthi Srinivas | maruthi.srinivas.m@gmail.com |
 
