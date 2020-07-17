@@ -1,0 +1,75 @@
+# Welcome to Serverless!
+# Please validate online always if you done any changes manually to yml file http://www.yamllint.com/
+# Happy Coding!
+
+service: mobilenet-pytorch-example
+
+# You can pin your service to only deploy with a specific Serverless version
+
+provider:
+  name: aws
+  runtime: python3.8
+  stage: dev
+  region: ap-south-1
+  timeout: 60
+  environment:
+    S3_BUCKET: sridevi-session1-bucket
+    MODEL_PATH: session1mobilenet.pt
+
+# you can add statements to the Lambda function's IAM Role here
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - s3:getObject
+      Resource: arn:aws:s3:::sridevi-session1-bucket/*
+
+# custome settings addes
+custom:
+  pythonRequirements:
+    dockerizePip: true
+    zip: true
+    slim: true
+    strip: false
+    noDeploy:
+      - docutils
+      - jmespath
+      - pip
+      - python-dateuti1
+      - setuptools
+      - six
+      - tensorboard
+    useStaticCache: true
+    useDownloadCache: true
+    cacheLocation: "./cache"
+
+
+# you can add packaging information here
+package:
+  individually: false
+  exclude:
+    - package.json
+    - package-log.json
+    - node_modules/**
+    - cache/**
+    - test/**
+    - __pycache__/**
+    - .pytest_cache/**
+    - model/** 
+
+functions:
+  classify_image:
+    handler: handler.classify_image
+    memorySize: 3008
+    timeout: 60
+#    The following are a few example events you can configure
+#    NOTE: Please make sure to change your handler code to work with those events
+#    Check the event documentation for details
+    events:
+      - http:
+          path: classify
+          method: post
+          cors: true
+
+
+plugins:
+  - serverless-python-requirements
